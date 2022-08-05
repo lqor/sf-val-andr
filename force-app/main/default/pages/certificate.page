@@ -1,0 +1,117 @@
+<apex:page renderAs="pdf" standardController="Participant__c" applyHtmlTag="false" showHeader="false">
+    <html>
+        <head>
+           <style>
+               body {
+               		font-family: "Arial Unicode MS";
+               }
+               
+               .floatblock {
+            	    float: left;
+               }
+               
+               .right, .left {
+               		padding-top: 5px;
+               }
+               
+               .right {
+               		text-align: right;
+               		padding-right: 20px;
+               		width: 47%;
+               }
+               
+               .left {
+               		text-align: left;
+               		padding-left: 20px;
+               		width: 43%;
+               }
+               
+               .vertline {
+               		background-color: rgb(50, 240, 208);
+               		height: 250px;
+               		width: 4px;
+               }
+               
+               .sign {
+               		width: 33%;
+               		text-align: center;
+               }
+               
+               .pic {
+               		padding: 40px 0 10px;
+               }
+               
+               .text {
+               		padding-top: 15px;
+               		border-top: 2px solid black;
+               }
+               
+               h1, .contactName, .dates, .theme, .where, .gpa {
+               		text-align: center;
+               }
+               
+               h1 {
+               		font-size: 65px;
+               		margin-bottom: 100px;
+               }
+               
+               .contactName, .theme {
+               		font-size: 40px;
+               }
+               
+               .where, .gpa {
+               		padding-top: 10px;
+               }
+               
+               .theme {
+               		padding-top: 45px;
+               }
+               
+               .dates, .where, .gpa {
+               		font-size: 25px;
+               } 
+               
+               .topics {
+               		margin-top: 25px;
+               }
+        	</style> 
+        </head>
+        
+        <body>
+            <h1>Certificate</h1>
+            <div class="contactName">
+                {! Participant__c.Contact_Name__r.Name}
+            </div>
+            <div class="dates">
+                <apex:outputText value="from {0,date,dd.} to {1,date,dd.MM.yyyy}">
+       				<apex:param value="{! Participant__c.Training__r.Start_Date__c }" />
+                	<apex:param value="{! Participant__c.Training__r.End_Date__c }" />
+				</apex:outputText> 
+            </div>
+            <div class="theme">
+                {! Participant__c.Training__r.Main_theme__c}
+            </div>
+            <div class="where">
+                in {! LEFT(Participant__c.Training__r.Training_location_address__c, FIND(",", Participant__c.Training__r.Training_location_address__c) - 1)}
+            </div>
+            <div class="gpa">
+                GPA {! Participant__c.GPA__c}
+            </div>
+            <div class="topics">
+                <div class="floatblock right">Main Topics</div>
+                <div class="floatblock vertline"></div>
+                <div class="floatblock left"><apex:outputField value="{! Participant__c.Training__r.Main_topics__c}"></apex:outputField></div>
+            </div>
+            <div>
+                <div class="floatblock sign pic"><apex:image url="{!$Resource.SignOfHoll}" height="90"/></div>
+                <div class="floatblock sign empty">&nbsp;</div>
+                <div class="floatblock sign pic"><apex:image url="{!$Resource.SignOfLange}" height="90"/></div>
+            </div>
+            <div>
+                <div class="floatblock sign text">Alexander Holl</div>
+                <div class="floatblock sign empty">&nbsp;</div>
+                <div class="floatblock sign text">Marko Lange</div>	
+            </div>
+        </body>
+    </html>
+</apex:page>
