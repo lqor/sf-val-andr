@@ -1,18 +1,22 @@
-public class newTaskTraining {
-    public static void createTask() {
-        Date today = Date.today();
-        List<Training__c> endedTrains = [SELECT Name, End_Date__c, Training_Course__r.OwnerId
-                                        FROM Training__c
-                                        WHERE DAY_ONLY(End_Date__c) = :today];
-        //System.debug(endedTrains);
-        List<Task> taski = new List<Task>();
-        for(Training__c train :endedTrains) {
-            Task task = new Task(Subject = 'Fill GPA (marks) and mark all participants as Participated.',
-                                Status = 'Not Started',
-                                WhatId = train.Id,
-                                OwnerId = train.Training_Course__r.OwnerId);
-            taski.add(task);
+public class NewTaskTraining {
+    static final String taskSubject = 'Fill GPA (marks) and mark all participants as Participated.';
+    static final String taskStatus = 'Not Started';
+    
+    public static Task createTask(Training__c training) {
+        Task task = new Task(Subject = taskSubject,
+                             Status = taskStatus,
+                             WhatId = training.Id,
+                             OwnerId = training.Training_Course__r.OwnerId);
+        return task;
+    }
+    
+    public static void insertTaskList() {
+        List<Task> taskList = new List<Task>();
+        for(Training__c training :[SELECT Name, End_Date__c, Training_Course__r.OwnerId
+                                  FROM Training__c
+                                  WHERE End_Date__c = TODAY]) {                    
+            taskList.add(NewTaskTraining.createTask(training));
         }
-        insert taski;
+        insert taskList;
     }
 }

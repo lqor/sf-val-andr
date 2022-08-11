@@ -1,9 +1,5 @@
-public class newTaskTrainingSchedulable implements Schedulable {
+public class NewTaskTrainingSchedulable implements Schedulable {
 	public void execute(SchedulableContext sc) { 
-        newTaskTraining.createTask(); 
+        NewTaskTraining.insertTaskList(); 
     }
 }
-
-// newTaskTrainingSchedulable ess = new newTaskTrainingSchedulable();
-// String cronexp = '0 59 23 * * ?';
-// System.schedule('Create Tasks for Trainings Scheduler', cronexp, ess);
