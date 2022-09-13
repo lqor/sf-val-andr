@@ -20,7 +20,7 @@ export default class RandomStringGenerator extends LightningElement {
         createAccount({random: this.generatedString}).then((id) => {
             this.showString = false;
             this.succeed = true;
-            this.accountLink = 'https://curious-unicorn-nzjuyg-dev-ed.lightning.force.com/lightning/r/Account/' + id + '/view';
+            this.accountLink = 'https://epam292-dev-ed.lightning.force.com/lightning/r/Account/' + id + '/view';
         })
     }
 }
