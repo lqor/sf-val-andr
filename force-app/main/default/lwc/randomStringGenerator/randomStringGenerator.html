@@ -1,0 +1,12 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Random String Generator" icon-name="standard:account">
+        <p class="slds-p-horizontal_small" if:true={showString}>Your random string: <span style="font-weight: bold;">{generatedString}</span></p>
+        <p class="slds-p-horizontal_small" if:true={succeed}>Account <lightning-formatted-url value={accountLink} label={generatedString} target="_blank"></lightning-formatted-url> has been successfully created.</p>
+        <div slot="footer">
+            <div class="slds-m-top_small slds-m-bottom_medium">
+                <lightning-button label="Randomize" title="Randomize string" onclick={handleClickRandomize} class="slds-m-left_x-small"></lightning-button>
+                <lightning-button variant="brand-outline" label="Save" title="Save string as account name" onclick={handleClickSave} class="slds-m-left_x-small"></lightning-button>
+            </div>
+        </div>
+    </lightning-card>  
+</template>
